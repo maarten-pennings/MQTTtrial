@@ -21,6 +21,21 @@ MQTT client
 - Add eg a text log and fill out MCPmqtt1CNT (see #define below) as topic name, single payload, digital display.
 -  Add eg a button and fill out MCPmqtt1BUT (see #define below) as topic name, and red as payload, make the button color red.
 
+
+## Application
+
+ESP to phone
+- When changing the potmeter, its new value is posted to the MQTT broke (as a _topic_ with key "MCPmqtt1POT").
+- Since the Android app is subscribed to that topic, it gets notified and update its gauge.
+- As bonus, the number of potmeter changes is recorded ('counter") and that is also posted (topic "MCPmqtt1CNT").
+- Finally there is a text topic "MCPmqtt1MSG" that contains a text message with the potmeter value and the counter value.
+
+Phone to ESP
+- The phone also updates a topic, "MCPmqtt1BUT".
+- The value is one of these strings `red`, `green`, `blue`, or `off`.
+- The ESP32 is subscribed to this topic and uses the message content to control its on-board RGB led.
+
+
 ## Photos
 
 ![Board](images/board.jpg)
